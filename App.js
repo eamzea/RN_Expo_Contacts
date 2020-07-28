@@ -1,21 +1,52 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
-export default function App() {
+import HomeScreen from "./screens/HomeScreen";
+import EditContactScreen from "./screens/EditContactScreen";
+import AddContactScreen from "./screens/AddContactScreen";
+import ViewContactScreen from "./screens/ViewContactScreen";
+
+const Stack = createStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: "#b83227",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "bold",
+          },
+        }}
+      >
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ title: "Contact App" }}
+        />
+        <Stack.Screen
+          name="Add"
+          component={AddContactScreen}
+          options={{ title: "Add New Contact" }}
+        />
+        <Stack.Screen
+          name="View"
+          component={ViewContactScreen}
+          options={{ title: "View Contact" }}
+        />
+        <Stack.Screen
+          name="Edit"
+          component={EditContactScreen}
+          options={{ title: "Edit Contact" }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
